@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navigation %}
+<nav id="navigation" class="navigation">
+			
+	<ul>
+		<li><a href="{% url "cardealer:index" %}">Home</a></li>
+		<li><a href="{% url "cardealer:listing" %}">All Listings</a></li>
+		<li><a href="{% url "cardealer:contact" %}">Contacts</a></li>
+	</ul>
+	
+</nav><!--/ #navigation-->
+{% endblock navigation %}
+
+{% block content %}
+<div class="main">
+
+	<!-- - - - - - - - - - - - - - - Container - - - - - - - - - - - - - - - - -->	
+
+	<section class="container content clearfix">
+		
+			<h3 class="section-title">Welcome to Car Dealer</h3>
+			
+			<p>
+				Take advantage of the opportunities that CarDealer has to offer: With CarDealer you can search and compare vehicles more efficiently and easily.
+			</p>
+			
+			<div class="offset-by-four eight columns alpha">
+				
+				<div class="form-account">
+					
+					<div class="form-heading">
+						<h3>Register now for Car Dealer</h3>
+					</div><!--/ .form-heading-->
+					
+					<div class="form-entry">
+						<p>
+							<label>Username:</label>
+							<input type="text" name="username" />
+						</p>
+						<p>
+							<label>Your Email:</label>
+							<input type="text" name="email" />
+						</p>
+						<p>
+							<label>Your Password:</label>
+							<input type="password" name="password1" />
+						</p>
+						<p>
+							<label>Confirm Password:</label>
+							<input type="password" name="password2" />
+						</p>
+						<a href="#" class="button orange">Sign Up</a>
+					</div><!--/ .form-entry-->
+					
+				</div><!--/ .form-account-->
+				
+			</div><!--/ .eight.columns-->
+	</section><!--/.container -->
+
+	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
+	
+</div><!--/ .main-->
+{% endblock content %}

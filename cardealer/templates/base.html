@@ -1,0 +1,182 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
+<!--[if IE 9]>					<html class="ie9 no-js" lang="en">     <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" lang="en">  <!--<![endif]-->
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz|Open+Sans:400,600,700|Oswald|Electrolize' rel='stylesheet' type='text/css'>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title>{% block title %}{% endblock title %}</title>
+	
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="shortcut" href={% static 'images/favicon.ico' %} />
+	<link rel="stylesheet" href={% static 'css/style.css' %} media="screen" />
+	<link rel="stylesheet" href={% static 'css/skeleton.css' %} media="screen" />
+	<link rel="stylesheet" href={% static 'sliders/flexslider/flexslider.css' %} media="screen" />
+	<link rel="stylesheet" href={% static 'fancybox/jquery.fancybox.css' %} media="screen" />
+
+	<!-- HTML5 Shiv + detect touch events -->
+	<script type="text/javascript" src={% static 'js/modernizr.custom.js' %}></script>
+</head>
+<body class="menu-1 h-style-1 text-1">
+
+<div class="wrap">
+	
+	<!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->	
+	
+	<header id="header" class="clearfix">
+		
+		<a href="{% url "cardealer:index" %}" id="logo"><img src={% static 'images/logo.png' %} alt="Car Dealer"></a>
+		
+		<div class="widget-container widget_search">
+			
+			<span class="call"><span>+1 234</span> 567-8901</span><br />
+			
+			<span class="adds">12 Street, Los Angeles, CA, 94101</span>
+
+		</div><!--/ .widget-container-->		
+		
+		{% block navigation %}{% endblock navigation %}
+		
+	</header><!--/ #header-->
+	
+	<!-- - - - - - - - - - - - - - end Header - - - - - - - - - - - - - - - - -->	
+
+    {% block content %}{% endblock content %}
+	
+	<!-- - - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->	
+	
+	<footer id="footer" class="container clearfix">
+		
+		<section class="container clearfix">
+			
+			<div class="eight columns">
+
+				<div class="widget-container widget_text">
+
+					<h3 class="widget-title">About Us</h3>
+
+					<div class="textwidget">
+
+						<p class="white">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. 
+						</p>	
+
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
+							incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+							exercitation.
+						</p>
+
+					</div><!--/ .textwidget-->
+
+					<a href="#" class="see">Read more</a>
+
+				</div><!--/ .widget-container-->	
+
+			</div><!--/ .four .columns-->
+
+			<div class="eight columns">
+
+				<div class="widget-container widget_contacts">
+
+					<h3 class="widget-title">Our Contacts</h3>			
+
+					<ul class="our-contacts">
+
+						<li class="address">
+							<b>Address Info 1:</b>
+							<p>Lorem ipsum Dolor sit amet, 658 Consectetur, Adipisicing 56 D</p>
+						</li>
+						<li class="phone">
+							<b>Phone:</b>&nbsp;<span>+1 (234) 567-8901</span> <br />
+							<b>FAX:</b>&nbsp;<span>+1 (234) 567-8902</span>
+						</li>
+						<li>
+							<b>Email: <a href="mailto:testmail@sitename.com">testmail@sitename.com</a></b>
+						</li>
+						<li>
+							<ul class="social-icons clearfix">
+								<li class="twitter"><a title="twitter" href="#">Twitter</a></li>
+								<li class="facebook"><a title="facebook" href="#">Facebook</a></li>
+								<li class="rss"><a title="rss" href="#">Rss</a></li>
+							</ul><!--/ .social-icons-->
+						</li>
+
+					</ul><!--/ .our-contacts-->
+
+				</div><!--/ .widget-container-->
+
+			</div><!--/ .four .columns-->
+			
+			<div class="adjective clearfix">
+
+				<p class="copyright">Copyright &copy; 2012. ThemeMakers. All rights reserved</p>
+
+				<p class="developed">developed by <a href="http://webtemplatemasters.com" target="_blank">ThemeMakers</a></p>
+				
+			</div><!--/ .adjective-->
+
+		</section><!--/ .container-->
+		
+	</footer><!--/ #footer-->
+	
+	<!-- - - - - - - - - - - - - - - end Footer - - - - - - - - - - - - - - - - -->		
+	
+</div><!--/ .wrap-->
+
+<div class="account-wrapper">
+	
+	<form class="form-reg" method="post" action="">
+		{% csrf_token %}
+		<a href="#" class="log">Login</a>
+		
+		<p>
+			<label>Username*</label>
+			<input class="input-medium" type="text" />
+		</p>
+		
+		<p>
+			<label>Password*</label>
+			<input class="input-medium" type="password" />
+		</p>
+		
+		<p class="forgot-pass">
+			<a href="#">Forgot your password?</a>
+		</p>
+		
+		<p>
+			<button href="#" class="button dark enter-btn">Login</button>
+			<a href="{% url "cardealer:register" %}" class="button dark enter-btn">Create an account</a>
+		</p>
+		
+		
+	</form><!--/ .form-reg-->
+	
+</div><!--/ .account-wrapper-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src={% static 'js/jquery-1.7.2.min.js' %}><\/script>')</script>
+<!--[if lt IE 9]>
+	<script src={% static 'js/selectivizr-and-extra-selectors.min.js' %}></script>
+<![endif]-->
+<script src={% static 'sliders/flexslider/jquery.flexslider-min.js' %}></script>
+<script src={% static 'js/jquery.gmap.min.js' %}></script>
+<script src={% static 'js/jquery-impromptu.js' %}></script>
+<script src={% static 'js/custom.js' %}></script>
+
+<div id="script-config" 
+    data-static-url="{% static '' %}"
+    data-easing="js/jquery.easing.1.3.js"
+    data-cycle="js/jquery.cycle.all.min.js"
+    data-respond="js/respond.min.js"
+    data-fancybox="fancybox/jquery.fancybox.pack.js"
+    style="display:none;">
+</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+<div class="main">
+
+	<!-- - - - - - - - - - - - - - - Container - - - - - - - - - - - - - - - - -->	
+
+	<section class="container content clearfix">
+		
+			<h3 class="section-title">My Profile</h3>
+			
+			<div class="form-account">
+
+				<div class="form-heading">
+					<h3>Change Your Profile</h3>
+				</div><!--/ .form-heading-->
+
+				<div class="form-entry clearfix">
+				
+					<div class="form-title">
+						<h5>Name</h5>
+					</div><!--/ .form-title-->
+					
+					<div class="eight columns alpha">
+						
+						<p>
+							<label>Username: (can’t be changed)</label>
+							<input type="text" />
+						</p>
+						<p>
+							<label>First Name:</label>
+							<input type="text" />
+						</p>
+						<p>
+							<label>Nickname:</label>
+							<input type="text" />
+						</p>
+						
+					</div><!--/ .eight-->
+					
+					<div class="eight columns omega">
+					
+						<p>
+							<label>Last Name:</label>
+							<input type="text" />
+						</p>
+						<p>
+							<label>Display name publicly as:</label>
+							<select>
+								<option value="0">Option 1</option>
+								<option value="1">Option 2</option>
+								<option value="2">Option 3</option>
+							</select>
+						</p>
+						
+					</div><!--/ .eight-->
+					
+					<div class="form-title">
+						<h5>Contact Info</h5>
+					</div><!--/ .form-title-->
+					
+					<div class="eight columns alpha">
+						
+						<p>
+							<label>E-mail:</label>
+							<input type="text" />
+						</p>
+						
+					</div><!--/ .eight-->
+					
+					<div class="eight columns omega">
+					
+						<p>
+							<label>Website:</label>
+							<input type="text" />
+						</p>
+						
+					</div><!--/ .eight-->
+					
+					<div class="form-title">
+						<h5>About Yourself</h5>
+					</div><!--/ .form-title-->		
+					
+					<p>
+						<label>Biographical Info:</label>
+						<textarea></textarea>							
+						<i>Share a little biographical information to fill out your profile. This may be shown publicly.</i>
+					</p>
+					
+					<p class="type">
+						<label>New Password:</label>
+						<input type="password" /><span>Leave these fields blank if you don’t want to change your password.</span>
+					</p>
+					
+					<p class="type">
+						<label>Retype your New Password:</label>
+						<input type="password" />
+					</p>
+					
+					<a href="#" class="button orange">Update Profile</a>
+					
+				</div><!--/ .form-entry-->
+
+			</div><!--/ .form-account-->
+				
+	</section><!--/.container -->
+
+	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
+	
+</div><!--/ .main-->
+{% endblock content %}

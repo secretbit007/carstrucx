@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Page Not Found
+{% endblock title %}
+
+{% block content %}
+<div class="main">
+
+    <!-- - - - - - - - - - - - - - - Container - - - - - - - - - - - - - - - - -->	
+
+    <section class="container content clearfix">
+        
+        <div class="error404">
+            
+            <img src={% static 'images/mac.png' %} alt="" />
+            
+            <div class="e404">
+                
+                <h1>404</h1>
+                
+                <div class="title-error">Page Not Found</div>
+                
+                <p>Sorry, the page you requested may have been moved or deleted</p>
+                <a href="{% url "cardealer:index" %}" class="button orange">Get me back to homepage!</a>
+                
+            </div><!--/ .e404-->
+            
+        </div><!--/ .error404-->
+        
+    </section><!--/.container -->
+
+    <!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
+    
+</div><!--/ .main-->
+{% endblock content %}

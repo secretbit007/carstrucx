@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navigation %}
+<nav id="navigation" class="navigation">
+			
+	<ul>
+		<li><a href="{% url "cardealer:index" %}">Home</a></li>
+		<li><a href="{% url "cardealer:listing" %}">All Listings</a></li>
+		<li><a href="{% url "cardealer:contact" %}">Contacts</a></li>
+	</ul>
+	
+</nav><!--/ #navigation-->
+{% endblock navigation %}
+
+{% block content %}
+<div class="main">
+
+	<!-- - - - - - - - - - - - - - - Container - - - - - - - - - - - - - - - - -->	
+
+	<section class="container content clearfix">
+		
+			<h3 class="section-title">Welcome to Car Dealer</h3>
+			
+			<p>
+				Take advantage of the opportunities that CarDealer has to offer: With CarDealer you can search and compare vehicles more efficiently and easily.
+			</p>
+			
+			<div class="offset-by-four eight columns alpha">
+				
+				<div class="form-account">
+					
+					<div class="form-heading">
+						<h3>Log In</h3>
+					</div><!--/ .form-heading-->
+					
+					<div class="form-entry">
+						<p>
+							<label>Username:</label>
+							<input type="text" />
+						</p>
+						<p>
+							<label>Password:</label>
+							<input type="password" />
+						</p>
+						<p>
+							<a href="#">Forgot your password?</a>
+						</p>
+						<button href="#" class="button orange">Login</button>
+					</div><!--/ .form-entry-->
+					
+				</div><!--/ .form-account-->
+				
+			</div><!--/ .eight.columns-->
+		
+	</section><!--/.container -->
+
+	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
+	
+</div><!--/ .main-->
+{% endblock content %}
