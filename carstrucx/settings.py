@@ -137,3 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'cardealer.CustomUser'
 
 LOGIN_URL = '/login/'
+
+import pymysql
+pymysql.install_as_MySQLdb()
