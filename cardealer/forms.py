@@ -6,7 +6,7 @@ from .models import Ad, CustomUser
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ("username", "email")
+        fields = ("username", "email", "first_name", "last_name")
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)

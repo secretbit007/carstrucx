@@ -25,39 +25,62 @@
 		
 			<h3 class="section-title">Welcome to Car Dealer</h3>
 			
-			<p>
-				Take advantage of the opportunities that CarDealer has to offer: With CarDealer you can search and compare vehicles more efficiently and easily.
-			</p>
-			
 			<div class="offset-by-four eight columns alpha">
-				
-				<div class="form-account">
+				{% if all_error %}
+					<blockquote>
+						{{ all_error }}
+					</blockquote>
+				{% endif %}
+				{% if username_error %}
+					<blockquote>
+						{{ username_error }}
+					</blockquote>
+				{% endif %}
+				{% if email_error %}
+					<blockquote>
+						{{ email_error }}
+					</blockquote>
+				{% endif %}
+				{% if password1_error %}
+					<blockquote>
+						{{ password1_error }}
+					</blockquote>
+				{% endif %}
+				{% if password2_error %}
+					<blockquote>
+						{{ password2_error }}
+					</blockquote>
+				{% endif %}
+				<form method="POST" action="{% url "cardealer:register" %}">
+					{% csrf_token %}
+					<div class="form-account">
 					
-					<div class="form-heading">
-						<h3>Register now for Car Dealer</h3>
-					</div><!--/ .form-heading-->
-					
-					<div class="form-entry">
-						<p>
-							<label>Username:</label>
-							<input type="text" name="username" />
-						</p>
-						<p>
-							<label>Your Email:</label>
-							<input type="text" name="email" />
-						</p>
-						<p>
-							<label>Your Password:</label>
-							<input type="password" name="password1" />
-						</p>
-						<p>
-							<label>Confirm Password:</label>
-							<input type="password" name="password2" />
-						</p>
-						<a href="#" class="button orange">Sign Up</a>
-					</div><!--/ .form-entry-->
-					
-				</div><!--/ .form-account-->
+						<div class="form-heading">
+							<h3>Register now for Car Dealer</h3>
+						</div><!--/ .form-heading-->
+						
+						<div class="form-entry">
+							<p>
+								<label>Username:</label>
+								<input type="text" name="username" />
+							</p>
+							<p>
+								<label>Your Email:</label>
+								<input type="text" name="email" />
+							</p>
+							<p>
+								<label>Your Password:</label>
+								<input type="password" name="password1" />
+							</p>
+							<p>
+								<label>Confirm Password:</label>
+								<input type="password" name="password2" />
+							</p>
+							<button type="submit" class="button orange">Sign Up</button>
+						</div><!--/ .form-entry-->
+						
+					</div><!--/ .form-account-->
+				</form>
 				
 			</div><!--/ .eight.columns-->
 	</section><!--/.container -->

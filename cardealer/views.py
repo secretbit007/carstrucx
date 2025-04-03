@@ -54,7 +54,7 @@ def privacy_request(request):
 def login_request(request):
     if request.method == 'POST':
         next_url = request.POST.get('next')
-        if next_url == '':
+        if next_url == None or next_url == '':
             next_url = 'cardealer:index'
         form = AuthenticationForm(request, data=request.POST)
         
@@ -350,7 +350,7 @@ def upload_request(request):
         my_file = request.FILES.get('file')
         my_file.name = f'{request.user.id}_{my_file.name}'
         UploadImage.objects.create(user=request.user, image=my_file)
-        return HttpResponse('')
+        return JsonResponse({'status': 'success'})
 
 @login_required
 def profile_request(request):

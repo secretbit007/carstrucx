@@ -25,34 +25,47 @@
 		
 			<h3 class="section-title">Welcome to Car Dealer</h3>
 			
-			<p>
-				Take advantage of the opportunities that CarDealer has to offer: With CarDealer you can search and compare vehicles more efficiently and easily.
-			</p>
-			
 			<div class="offset-by-four eight columns alpha">
-				
-				<div class="form-account">
-					
-					<div class="form-heading">
-						<h3>Log In</h3>
-					</div><!--/ .form-heading-->
-					
-					<div class="form-entry">
-						<p>
-							<label>Username:</label>
-							<input type="text" />
-						</p>
-						<p>
-							<label>Password:</label>
-							<input type="password" />
-						</p>
-						<p>
-							<a href="#">Forgot your password?</a>
-						</p>
-						<button href="#" class="button orange">Login</button>
-					</div><!--/ .form-entry-->
-					
-				</div><!--/ .form-account-->
+				{% if all_error %}
+					<blockquote>
+						{{ all_error }}
+					</blockquote>
+				{% endif %}
+				{% if username_error %}
+					<blockquote>
+						{{ username_error }}
+					</blockquote>
+				{% endif %}
+				{% if password_error %}
+					<blockquote>
+						{{ password_error }}
+					</blockquote>
+				{% endif %}
+				<form method="POST" action="{% url "cardealer:login" %}">	
+					{% csrf_token %}
+					<div class="form-account">
+						
+						<div class="form-heading">
+							<h3>Log In</h3>
+						</div><!--/ .form-heading-->
+						
+						<div class="form-entry">
+							<p>
+								<label>Username:</label>
+								<input type="text" name="username" />
+							</p>
+							<p>
+								<label>Password:</label>
+								<input type="password" name="password" />
+							</p>
+							<p>
+								<a href="#">Forgot your password?</a>
+							</p>
+							<button href="#" class="button orange">Login</button>
+						</div><!--/ .form-entry-->
+						
+					</div><!--/ .form-account-->
+				</form>
 				
 			</div><!--/ .eight.columns-->
 		

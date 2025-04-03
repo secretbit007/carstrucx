@@ -372,9 +372,9 @@ h6 {line-height: 1.5em;}
 			.form-reg .log {
 				position: absolute;
 				top: 20px;
-				left: -70px;
+				left: -80px;
 				padding: 6px 10px 6px 10px;
-				width: 50px;
+				width: 69px;
 				-webkit-border-radius: 3px 0 0 3px;
 				   -moz-border-radius: 3px 0 0 3px;
 						border-radius: 3px 0 0 3px;
@@ -3444,4 +3444,32 @@ article.entry:first-child {margin-top: 0;}
 			
 			ul.tabs-nav li.active a {border-bottom-color: #dddcdc;}
 
+}
+
+.progress-container {
+    width: 100%;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin: 5px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4CAF50;
+    transition: width 0.3s;
+}
+
+.file-upload {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 97%;
+}
+
+.button.green {
+    background: #4CAF50;
+    color: white;
 }

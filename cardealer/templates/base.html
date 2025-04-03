@@ -131,32 +131,48 @@
 </div><!--/ .wrap-->
 
 <div class="account-wrapper">
-	
-	<form class="form-reg" method="post" action="">
-		{% csrf_token %}
-		<a href="#" class="log">Login</a>
-		
-		<p>
-			<label>Username*</label>
-			<input class="input-medium" type="text" />
-		</p>
-		
-		<p>
-			<label>Password*</label>
-			<input class="input-medium" type="password" />
-		</p>
-		
-		<p class="forgot-pass">
-			<a href="#">Forgot your password?</a>
-		</p>
-		
-		<p>
-			<button href="#" class="button dark enter-btn">Login</button>
-			<a href="{% url "cardealer:register" %}" class="button dark enter-btn">Create an account</a>
-		</p>
-		
-		
-	</form><!--/ .form-reg-->
+	{% if user.is_authenticated %}
+		<form class="form-reg" method="post" action="{% url "cardealer:login" %}">
+			<a href="#" class="log">Account</a>
+			
+			<div>
+				<span class="alpha" style="font-size: 20px">@{{ user.username }}</span>
+				<span style="padding-left: 15px; font-size: 15px"><a href="{% url "cardealer:logout" %}" style="color: white;">Logout</a></span>
+			</div>
+
+			<div>
+				<a href="{% url "cardealer:profile" %}" class="button dark enter-btn">My Profile</a>
+				<a href="{% url "cardealer:post-ad" %}" class="button dark enter-btn" style="margin-left: 10px;">Post A Car</a>
+			</div>
+			
+		</form><!--/ .form-reg-->
+	{% else %}
+		<form class="form-reg" method="post" action="{% url "cardealer:login" %}">
+			{% csrf_token %}
+			<a href="#" class="log">Login</a>
+			
+			<p>
+				<label>Username*</label>
+				<input class="input-medium" type="text" name="username" />
+			</p>
+			
+			<p>
+				<label>Password*</label>
+				<input class="input-medium" type="password" name="password" />
+			</p>
+			
+			<p class="forgot-pass">
+				<a href="#">Forgot your password?</a>
+			</p>
+			
+			<p>
+				<button href="#" class="button dark enter-btn">Login</button>
+				<a href="{% url "cardealer:register" %}" class="button dark enter-btn">Create an account</a>
+			</p>
+			
+			
+		</form><!--/ .form-reg-->
+	{% endif %}
 	
 </div><!--/ .account-wrapper-->
 
@@ -166,7 +182,6 @@
 	<script src={% static 'js/selectivizr-and-extra-selectors.min.js' %}></script>
 <![endif]-->
 <script src={% static 'sliders/flexslider/jquery.flexslider-min.js' %}></script>
-<script src={% static 'js/jquery.gmap.min.js' %}></script>
 <script src={% static 'js/jquery-impromptu.js' %}></script>
 <script src={% static 'js/custom.js' %}></script>
 

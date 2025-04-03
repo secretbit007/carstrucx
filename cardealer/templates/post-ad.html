@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block navigation %}
+<nav id="navigation" class="navigation">
+			
+	<ul>
+		<li><a href="{% url "cardealer:index" %}">Home</a></li>
+		<li><a href="{% url "cardealer:listing" %}">All Listings</a></li>
+		<li><a href="{% url "cardealer:contact" %}">Contacts</a></li>
+	</ul>
+	
+</nav><!--/ #navigation-->
+{% endblock navigation %}
+
+{% block content %}
+<div class="main">
+
+	<!-- - - - - - - - - - - - - - - Container - - - - - - - - - - - - - - - - -->	
+
+	<section class="container content clearfix">
+		<form method="POST" action="{% url "cardealer:post-ad" %}">
+			{% csrf_token %}
+			<div class="form-account">
+
+				<div class="form-heading">
+					<h3>Sell Your Car</h3>
+				</div><!--/ .form-heading-->
+	
+				<div class="form-entry">
+					
+					<p>
+						Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+						consequat. Duis aute irure dolor in reprehenderit in voluptate.
+					</p>
+					
+					<div class="form-title"><h5>Submit Your Vechicle</h5></div>
+					
+					<div class="cart-holder clearfix">
+						<div class="cart-content step-1 clearfix">
+	
+							
+							
+							<div class="five columns alpha">
+								
+								<p>
+									<label>Condition:</label>
+									<input type="text" name="condition" />
+								</p>
+								
+								<p>
+									<label>Make:</label>
+									<input type="text" name="make" required />
+								</p>
+								
+								<p>
+									<label>Model:</label>
+									<input type="text" name="model" required />
+								</p>
+								
+								<p>
+									<label>Body type:</label>
+									<input type="text" name="bodystyle" />
+								</p>
+								
+							</div><!--/ .five-->
+							
+							<div class="five columns">
+								
+								<p class="three columns alpha">
+									<label>Price:</label>
+									<input type="text" name="price" required />
+								</p>
+								
+								<p class="three columns omega">
+									<label>Year:</label>
+									<input type="text" name="manufacture_year" required />
+								</p>
+								
+								<p>
+									<label>Milleage:</label>
+									<input type="text" name="mileage" required />
+								</p>
+								
+								<p>
+									<label>Ecterrior color:</label>
+									<input type="text" name="color" />
+								</p>
+								
+								<p>
+									<label>Fuel type:</label>
+									<input type="text" name="fuel" />
+								</p>
+								
+							</div><!--/ .five-->
+							
+							<div class="five columns omega">
+	
+								<p>
+									<label>Door count:</label>
+									<input type="text" name="doorcount" />	
+								</p>
+								
+								<p>
+									<label>Transmission:</label>
+									<input type="text" name="transtype" />	
+								</p>
+								
+								<p class="three columns alpha">
+									<label>State:</label>
+									<input type="text" name="state" required />
+								</p>
+								
+								<p class="three columns omega">
+									<label>City:</label>
+									<input type="text" name="city" required />
+								</p>
+	
+								<p class="three columns alpha">
+									<label>Zip:</label>
+									<input type="text" name="zip" required />
+								</p>
+								
+							</div><!--/ .five-->
+							
+						</div><!--/ .cart-content-->
+	
+						<div class="cart-content step-2 clearfix">
+								
+							<div class="five columns alpha">
+								
+								<p>
+									<label>Title:</label>
+									<input type="text" name="title" required/>
+								</p>
+								
+							</div><!--/ .five-->
+							
+							<div class="clear"></div>
+							
+							<p>
+								<label>Description:</label>
+								<textarea name="description" required></textarea>
+							</p>
+							
+							<div class="clear"></div>
+							
+							<div class="form-title"><h6>Upload Photos</h6></div>
+							
+							<div class="upload-holder">
+								<input type="file" id="image-upload" name accept="image/*" multiple style="display:none;">
+								<a href="#" class="button orange" onclick="document.getElementById('image-upload').click(); return false;">
+									Select Images...
+								</a>
+								<div id="file-names" style="margin-top:10px;"></div>
+								<div id="image-previews" style="margin-top:15px; display:flex; flex-wrap:wrap; gap:10px;"></div>
+								
+								<!-- Progress container -->
+								<div id="upload-progress" style="margin-top:20px; display:none;">
+									<h4>Upload Progress:</h4>
+									<div id="progress-bars"></div>
+									<button id="start-upload" class="button green">Start Upload</button>
+								</div>
+							</div>
+	
+							<script>
+								let selectedImages = [];
+	
+								document.getElementById('image-upload').addEventListener('change', function(e) {
+									const files = Array.from(e.target.files).filter(file => file.type.match('image.*'));
+									
+									selectedImages = files; // Store for later upload
+									displayPreviews(files);
+									
+									// Show upload section if files are selected
+									if (files.length > 0) {
+										document.getElementById('upload-progress').style.display = 'block';
+									}
+								});
+	
+								document.getElementById('start-upload').addEventListener('click', async function() {
+									if (selectedImages.length === 0) return;
+									
+									this.disabled = true;
+									await uploadImagesSequentially(selectedImages);
+									this.disabled = false;
+								});
+	
+								// Helper functions
+								function getCookie(name) {
+									let cookieValue = null;
+									if (document.cookie && document.cookie !== '') {
+										const cookies = document.cookie.split(';');
+										for (let i = 0; i < cookies.length; i++) {
+											const cookie = cookies[i].trim();
+											if (cookie.substring(0, name.length + 1) === (name + '=')) {
+												cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+												break;
+											}
+										}
+									}
+									return cookieValue;
+								}
+								
+								const csrftoken = getCookie('csrftoken');
+	
+								function displayPreviews(files) {
+									const previewsContainer = document.getElementById('image-previews');
+									const namesContainer = document.getElementById('file-names');
+									
+									previewsContainer.innerHTML = '';
+									namesContainer.innerHTML = `${files.length} image(s) selected`;
+									
+									files.forEach(file => {
+										const reader = new FileReader();
+										reader.onload = (e) => {
+											const preview = document.createElement('div');
+											preview.innerHTML = `
+												<img src="${e.target.result}" style="max-height:100px; border:1px solid #ddd;">
+												<div class="file-info">${file.name} (${formatFileSize(file.size)})</div>
+											`;
+											previewsContainer.appendChild(preview);
+										};
+										reader.readAsDataURL(file);
+									});
+								}
+	
+								async function uploadImagesSequentially(files) {
+									const progressBars = document.getElementById('progress-bars');
+									progressBars.innerHTML = ''; // Clear previous progress bars
+									
+									for (let i = 0; i < files.length; i++) {
+										const file = files[i];
+										const formData = new FormData();
+										formData.append('file', file);
+										
+										// Create progress UI for this file
+										const progressId = `progress-${i}`;
+										progressBars.innerHTML += `
+											<div class="file-upload">
+												<div>${file.name}</div>
+												<div class="progress-container">
+													<div id="${progressId}" class="progress-bar" style="width:0%"></div>
+												</div>
+												<span id="status-${i}">Waiting...</span>
+											</div>
+										`;
+										
+										try {
+											await uploadFile(formData, progressId, i);
+											document.getElementById(`status-${i}`).textContent = "✓ Uploaded";
+										} catch (error) {
+											document.getElementById(`status-${i}`).textContent = "✗ Failed: " + error.message;
+										}
+									}
+								}
+	
+								function uploadFile(formData, progressId, index) {
+									return new Promise((resolve, reject) => {
+										const xhr = new XMLHttpRequest();
+										
+										xhr.upload.addEventListener('progress', (e) => {
+											if (e.lengthComputable) {
+												const percent = Math.round((e.loaded / e.total) * 100);
+												document.getElementById(progressId).style.width = percent + '%';
+											}
+										});
+										
+										xhr.addEventListener('load', () => {
+											if (xhr.status >= 200 && xhr.status < 300) {
+												resolve(xhr.response);
+											} else {
+												reject(new Error('Server responded with ' + xhr.status));
+											}
+										});
+										
+										xhr.addEventListener('error', () => {
+											reject(new Error('Network error'));
+										});
+										
+										xhr.open('POST', '{% url "cardealer:uploads" %}', true);
+										
+										// Add CSRF token to headers
+										xhr.setRequestHeader('X-CSRFToken', csrftoken);
+										
+										xhr.send(formData);
+									});
+								}
+	
+								function formatFileSize(bytes) {
+									if (bytes === 0) return '0 Bytes';
+									const k = 1024;
+									const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+									const i = Math.floor(Math.log(bytes) / Math.log(k));
+									return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+								}
+							</script>
+							
+							<div class="clear"></div>
+			
+						</div><!--/ .cart-content-->
+						
+						<button type="submit" class="button orange">Submit</button><br /> <br />
+						
+					</div><!--/ .cart-holder-->
+					
+				</div><!--/ .form-entry-->
+	
+			</div><!--/ .form-account-->
+		</form>
+		
+	</section><!--/.container -->
+
+	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
+	
+</div><!--/ .main-->
+{% endblock content %}
