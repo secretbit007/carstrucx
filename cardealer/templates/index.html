@@ -29,96 +29,28 @@
 
 			<ul class="slides">
 
-				<li>
-					<img src={% static 'images/sliders/slide-1.jpg' %} alt="" />
+				{% for premium_ad in premium_ads %}
+					<li>
+						{% for picture in premium_ad.picture_set.all %}
+							{% if forloop.first %}
+								<img src="{{ picture.thumb_big.url }}" alt="">
+							{% endif %}
+						{% endfor %}
 
-					<div class="caption">
-						<div class="caption-entry">
+						<div class="caption">
+							<div class="caption-entry">
 
-							<dl class="auto-detailed clearfix">
-								<dt><span class="model">2005 Shevrolet</span></dt>
-								<dd class="media-hidden"><b>1.8 XRS Sedan</b></dd>
-								<dd class="media-hidden"><b>36000 Miles</b></dd>
-								<dd><span class="heading">$25896</span></dd>
-							</dl><!--/ .auto-detailed-->
+								<dl class="auto-detailed clearfix">
+									<dt><span class="model">{{ premium_ad.title | truncatechars:25 }}</span></dt>
+									<dd><span class="heading">${{ premium_ad.price | intcomma }}</span></dd>
+								</dl><!--/ .auto-detailed-->
 
-							<a href="#" class="button orange">Details &raquo;</a>
+								<a href="{% url 'cardealer:detail' pk=premium_ad.id %}" class="button orange">Details &raquo;</a>
 
-						</div><!--/ .caption-entry-->
-					</div><!--/ .caption-->
-				</li>
-				<li>
-					<img src={% static 'images/sliders/slide-2.jpg' %} alt="" />
-
-					<div class="caption">
-						<div class="caption-entry">
-
-							<dl class="auto-detailed clearfix">
-								<dt><span class="model">2012 BMW</span></dt>
-								<dd class="media-hidden"><b>1.8 XRS Sedan</b></dd>
-								<dd class="media-hidden"><b>36000 Miles</b></dd>
-								<dd><span class="heading">$25896</span></dd>
-							</dl><!--/ .auto-detailed-->
-
-							<a href="#" class="button orange">Details &raquo;</a>
-
-						</div><!--/ .caption-entry-->
-					</div><!--/ .caption-->
-				</li>
-				<li>
-					<img src={% static 'images/sliders/slide-3.jpg' %} alt="" />
-
-					<div class="caption">
-						<div class="caption-entry">
-
-							<dl class="auto-detailed clearfix">
-								<dt><span class="model">2010 Subaru</span></dt>
-								<dd class="media-hidden"><b>1.8 XRS Sedan</b></dd>
-								<dd class="media-hidden"><b>36000 Miles</b></dd>
-								<dd><span class="heading">$25896</span></dd>
-							</dl><!--/ .auto-detailed-->
-
-							<a href="#" class="button orange">Details &raquo;</a>
-
-						</div><!--/ .caption-entry-->
-					</div><!--/ .caption-->
-				</li>
-				<li>
-					<img src={% static 'images/sliders/slide-4.jpg' %} alt="" />
-
-					<div class="caption">
-						<div class="caption-entry">
-
-							<dl class="auto-detailed clearfix">
-								<dt><span class="model">2005 Honda</span></dt>
-								<dd class="media-hidden"><b>1.8 XRS Sedan</b></dd>
-								<dd class="media-hidden"><b>36000 Miles</b></dd>
-								<dd><span class="heading">$25896</span></dd>
-							</dl><!--/ .auto-detailed-->
-
-							<a href="#" class="button orange">Details &raquo;</a>
-
-						</div><!--/ .caption-entry-->
-					</div><!--/ .caption-->
-				</li>
-				<li>
-					<img src={% static 'images/sliders/slide-5.jpg' %} alt="" />
-
-					<div class="caption">
-						<div class="caption-entry">
-
-							<dl class="auto-detailed clearfix">
-								<dt><span class="model">2005 Honda</span></dt>
-								<dd class="media-hidden"><b>1.8 XRS Sedan</b></dd>
-								<dd class="media-hidden"><b>36000 Miles</b></dd>
-								<dd><span class="heading">$25896</span></dd>
-							</dl><!--/ .auto-detailed-->
-
-							<a href="#" class="button orange">Details &raquo;</a>
-
-						</div><!--/ .caption-entry-->
-					</div><!--/ .caption-->
-				</li>
+							</div><!--/ .caption-entry-->
+						</div><!--/ .caption-->
+					</li>
+				{% endfor %}
 
 			</ul><!--/ .slides-->
 
@@ -132,59 +64,27 @@
 			
 			<h3 class="widget-title">Quick Search</h3>
 			
-			<form action="/" id="boxpanel" class="form-panel">
-				
+			<form action="{% url 'cardealer:listing' %}" id="boxpanel" class="form-panel" method="GET">
+				{% csrf_token %}
+				<input type="hidden" name="page" value="1">
+
 				<fieldset>
-					<label>Manufacturer:</label>
-					<select>
-						<option value="0">Any</option>
-						<option value="1">Lorem</option>
-						<option value="2">Ipsum</option>
-					</select>
+					<label>Keyword:</label>
+					<input style="width: 100%;" type="text" name="title" />
 				</fieldset>
-				
+
 				<fieldset>
-					<label>Min Price:</label>
-					<select>
-						<option value="0">No min</option>
-						<option value="1">Lorem</option>
-						<option value="2">Ipsum</option>
-					</select>
+					<label>Year:</label>
+					<input style="width: 100%;" type="text" name="manufacture_year" />
 				</fieldset>
-				
+
 				<fieldset>
-					<label>Max Price:</label>
-					<select>
-						<option value="0">No max</option>
-						<option value="1">Lorem</option>
-						<option value="2">Ipsum</option>
-					</select>
-				</fieldset>
-				
-				<fieldset>
-					<label>Trans:</label>
-					<select>
-						<option value="0">Any</option>
-						<option value="1">Lorem</option>
-						<option value="2">Ipsum</option>
-					</select>
-				</fieldset>
-				
-				<fieldset>
-					<label>Mileage:</label>
-					<select>
-						<option value="0">Any</option>
-						<option value="1">Lorem</option>
-						<option value="2">Ipsum</option>
-					</select>
-				</fieldset>
-				
-				<fieldset>
-					<label>Body Type:</label>
-					<select>
-						<option value="0">Any</option>
-						<option value="1">Lorem</option>
-						<option value="2">Ipsum</option>
+					<label>Make:</label>
+					<select style="width: 100%;" class=" form-control make" name="make">
+						<option label="Any Make"></option>
+						{% for make in makes %}
+							<option value="{{ make.id }}">{{ make.name }}</option>
+						{% endfor %}
 					</select>
 				</fieldset>
 				

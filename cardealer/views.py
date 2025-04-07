@@ -1,5 +1,6 @@
 import os
 import shutil
+from dotenv import load_dotenv
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
@@ -18,6 +19,8 @@ from django.utils.html import strip_tags
 import datetime
 from . import forms
 from .models import Model, Make, BodyStyle, TransmissionType, Fuel, Color, DoorCount, Condition, Picture, UploadImage, Ad, Category, CustomUser
+
+load_dotenv()
 
 def index_request(request):
     ads = Ad.objects.filter(date_expire__gte=timezone.now())
@@ -215,11 +218,11 @@ def sendmail_request(request):
         send_mail(
             subject=subject,
             message=strip_tags(body),
-            from_email=f'{client} <info@automarken.net>',
+            from_email=f'{client} <{os.getenv('EMAIL_FROM')}>',
             recipient_list=[receiver],
             fail_silently=False,
-            auth_user='admin@automarken.net',
-            auth_password='iDKp~;~#uIYS',
+            auth_user=os.getenv('EMAIL_USER'),
+            auth_password=os.getenv('EMAIL_PASSWORD'),
             html_message=body
         )
         
@@ -282,6 +285,7 @@ def getooyyoxml_request(request):
 def post_ad_request(request):
     if request.method == 'POST':
         form = forms.PostAdForm(request.POST)
+        
         if form.is_valid():
             ad = form.save(commit=False)
             ad.user = request.user
@@ -310,10 +314,13 @@ def post_ad_request(request):
 
             return redirect('cardealer:detail', pk=ad.id)
         else:
+            makes = Make.objects.all()
+
             context = {
                 'title': 'Post Ad | Carstrucx',
                 'styles': BodyStyle.objects.all(),
                 'makes': Make.objects.all(),
+                'models': Model.objects.filter(make=makes[0]),
                 'transtypes': TransmissionType.objects.all(),
                 'fuels': Fuel.objects.all(),
                 'colors': Color.objects.all(),
@@ -329,11 +336,13 @@ def post_ad_request(request):
                 
             return render(request, 'post-ad.html', context=context)
     else:
+        makes = Make.objects.all()
+
         context = {
             'title': 'Post Ad | Carstrucx',
             'styles': BodyStyle.objects.all(),
             'makes': Make.objects.all(),
-            'models': Model.objects.all(),
+            'models': Model.objects.filter(make=makes[0]),
             'transtypes': TransmissionType.objects.all(),
             'fuels': Fuel.objects.all(),
             'colors': Color.objects.all(),

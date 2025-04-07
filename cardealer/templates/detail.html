@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block navigation %}
+<nav id="navigation" class="navigation">
+			
+	<ul>
+		<li><a href="{% url "cardealer:index" %}">Home</a></li>
+		<li><a href="{% url "cardealer:listing" %}">All Listings</a></li>
+		<li><a href="{% url "cardealer:contact" %}">Contacts</a></li>
+	</ul>
+	
+</nav><!--/ #navigation-->
+{% endblock navigation %}
+
+{% block content %}
+<div class="main">
+
+	<!-- - - - - - - - - - - - - - - Container - - - - - - - - - - - - - - - - -->	
+
+	<section class="container sbl clearfix">
+
+		<!-- - - - - - - - - - - - - - - Content - - - - - - - - - - - - - - - - -->		
+
+		<section id="content" class="sixteen columns">
+			
+			<article class="item clearfix">
+				<span>Post Date: {{ posted_date | date:'F d, Y' }}</span> | <span>Views: {{ views }}</span> | <span>Location: USA, {{ state }}, {{ city }}, {{ zip }}</span> | <span><a href="{% url "cardealer:edit" pk=id %}">Edit</a></span> | <span><a href="{% url "cardealer:delete" pk=id %}">Delete</a></span>
+				<h2 class="title">{{ title }}</h2>
+				
+				<div id="gallery" class="gallery">
+
+					<div class="slideshow-container">
+						<div id="loading" class="loader"></div>
+						<div id="slideshow" class="slideshow clearfix"></div>
+					</div><!--/ .slideshow-container-->
+
+					<div id="thumbs" class="clearfix">
+
+						<ul class="thumbs list-image clearfix">
+							{% for picture in pictures %}
+								<li>
+									<a class="thumb" name="leaf" href="{{ picture.image.url }}">
+										<img src="{{ picture.thumb_small.url }}" />
+									</a>
+								</li>
+							{% endfor %}
+
+						</ul><!--/ .thumbs-->
+
+					</div><!--/ #thumbs-->
+
+				</div><!--/ #gallery-->
+
+				<div class="extra">
+					
+					<b class="heading">Price:</b>
+					
+					<span class="cost">${{ price | intcomma }}</span>
+					
+					<ul class="list type-1">
+						{% if condition %}
+                           <li>
+                              <b>Condition: </b><span>{{ condition.name }}</span>
+						   </li>
+                        {% endif %}
+                        {% if make %}
+                           <li>
+                              <b>Make: </b><span>{{ make.name }}</span>
+						   </li>
+                        {% endif %}
+                        {% if model %}
+                           <li>
+                              <b>Model: </b><span>{{ model.name }}</span>
+						   </li>
+                        {% endif %}
+                        {% if manufacture_year %}
+                           <li>
+                              <b>Manufacture Year: </b><span>{{ manufacture_year }}</span>
+						   </li>
+                        {% endif %}
+                        {% if bodystyle %}
+                           <li>
+                              <b>Body Style: </b><span>{{ bodystyle.name }}</span>
+						   </li>
+                        {% endif %}
+                        {% if color %}
+                           <li>
+                              <b>Color: </b><span>{{ color.name }}</span>
+						   </li>
+                        {% endif %}
+                        {% if doorcount %}
+                           <li>
+                              <b>Body Style: </b><span>{{ doorcount.count }}</span>
+						   </li>
+                        {% endif %}
+                        {% if fuel %}
+                           <li>
+                              <b>Fuel: </b><span>{{ fuel.name }}</span>
+						   </li>
+                        {% endif %}
+                        {% if transtype %}
+                           <li>
+                              <b>Transmission Type: </b><span>{{ transtype.name }}</span>
+						   </li>
+                        {% endif %}
+					</ul>
+					
+				</div><!--/ .extra-->					
+				
+				<div class="entry-item">
+					
+					<h3 class="section-title">VIN Information</h3>
+					
+					<p>
+						{{ description | safe }}
+					</p>
+					
+					<h3 class="section-title">Contact Us regarding this car</h3>
+					
+						<form method="post" action="" class="comments-form" id="email-form">
+							{% csrf_token %}
+							<input type="hidden" name="subject" id="subject" value="{{ title }}">
+							<input type="hidden" name="email" id="email" value="{{ email }}">
+							<input type="hidden" name="ad_link" id="ad_link" value="{{ request.build_absolute_uri }}">
+
+							<p class="input-block">
+								<label for="name">Your Name (required)</label>
+								<input type="text" name="client_name" id="client_name" />
+							</p>
+
+							<p class="input-block">
+								<label for="email">Your Email (required)</label>
+								<input type="text" name="email_from" id="email_from" />
+							</p>
+
+							<p class="input-block">
+								<label for="comments">You Message: (required)</label>
+								<textarea name="comments" id="comments" cols="30" rows="10"></textarea>	
+							</p>
+
+							<p class="input-block">
+								<button class="button orange" type="submit" id="submit">Submit</button>
+							</p>
+							<div id="notification">
+							</div>
+
+						</form><!--/ .contact-form-->	
+					
+				</div><!--/ .entry-item-->
+				
+			</article><!--/ .item-->
+			
+		</section><!--/ #content-->
+
+		<!-- - - - - - - - - - - - - - end Content - - - - - - - - - - - - - - - - -->	
+
+	</section><!--/.container -->
+
+	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
+	<script>
+		$('#email-form').on('submit', function (event) {
+			event.preventDefault();
+			$("#result").html('');
+			var btn = $("#submit")
+			btn.html('Sending...');
+			btn.prop("disabled", true);
+	  
+			$.ajax({
+			   url: "{% url 'cardealer:sendmail' %}",
+			   type: "POST",
+			   data: {
+				  "csrfmiddlewaretoken": $('input[name=csrfmiddlewaretoken]').val(),
+				  "client_name": $("#client_name").val(),
+				  "subject": $("#subject").val(),
+				  "message": $("#comments").val(),
+				  "email_from": $("#email_from").val(),
+				  "email_to": $("#email").val(),
+				  "ad_link": $("#ad_link").val()
+			   },
+			   success: function(json) {
+				  $("#notification").html('<p class="success">Email sent successfully!</p>'
+				  );
+				  btn.html('Submit');
+				  btn.prop("disabled", false);
+				  ta('send', 'lead');
+			   },
+			   error: function(error) {
+				  $("#notification").html('<p class="error">Failed to send email!</p>'
+				  );
+				  btn.html('Submit');
+				  btn.prop("disabled", false);
+			   }
+			});
+		 });
+	</script>
+</div><!--/ .main-->
+{% endblock content %}

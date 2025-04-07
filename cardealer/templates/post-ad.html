@@ -28,97 +28,148 @@
 	
 				<div class="form-entry">
 					
-					<p>
-						Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-						consequat. Duis aute irure dolor in reprehenderit in voluptate.
-					</p>
-					
 					<div class="form-title"><h5>Submit Your Vechicle</h5></div>
 					
 					<div class="cart-holder clearfix">
 						<div class="cart-content step-1 clearfix">
-	
-							
 							
 							<div class="five columns alpha">
+
+								<p>
+									<label>Category:</label>
+									<select name="category">
+										{% for category in categories %}
+											<option value="{{ category.id }}" {% if ad and category == ad.category %}selected="selected"{% endif %}>
+												{{ category.name }}
+											</option>
+										{% endfor %}
+									</select>
+								</p>
 								
 								<p>
 									<label>Condition:</label>
-									<input type="text" name="condition" />
+									<select name="condition">
+										{% for condition in conditions %}
+											<option value="{{ condition.id }}" {% if ad and condition == ad.condition %}selected="selected"{% endif %}>
+												{{ condition.name }}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 								<p>
 									<label>Make:</label>
-									<input type="text" name="make" required />
+									<select name="make" id="make">
+										{% for make in makes %}
+											<option value="{{ make.id }}" {% if ad and make == ad.make %}selected="selected"{% endif %}>
+												{{ make.name }}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 								<p>
 									<label>Model:</label>
-									<input type="text" name="model" required />
+									<select name="model" id="model">
+										{% for model in models %}
+											<option value="{{ model.id }}" {% if ad and model == ad.model %}selected="selected"{% endif %}>
+												{{ model.name}}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 								<p>
 									<label>Body type:</label>
-									<input type="text" name="bodystyle" />
+									<select name="bodystyle" id="bodystyle">
+										{% for style in styles %}
+											<option value="{{ style.id }}" {% if ad and style == ad.style %}selected="selected"{% endif %}>
+												{{ style.name}}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 							</div><!--/ .five-->
 							
 							<div class="five columns">
 								
-								<p class="three columns alpha">
-									<label>Price:</label>
-									<input type="text" name="price" required />
-								</p>
-								
-								<p class="three columns omega">
-									<label>Year:</label>
-									<input type="text" name="manufacture_year" required />
+								<p>
+									<label>Door count:</label>
+									<select name="doorcount" id="doorcount">
+										{% for doorcount in doorcounts %}
+											<option value="{{ doorcount.id }}" {% if ad and doorcount == ad.doorcount %}selected="selected"{% endif %}>
+												{{ doorcount.count }}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 								<p>
-									<label>Milleage:</label>
-									<input type="text" name="mileage" required />
+									<label>Transmission:</label>
+									<select name="transtype" id="transtype">
+										{% for transtype in transtypes %}
+											<option value="{{ transtype.id }}" {% if ad and transtype == ad.transtype %}selected="selected"{% endif %}>
+												{{ transtype.name}}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 								<p>
-									<label>Ecterrior color:</label>
-									<input type="text" name="color" />
+									<label>Color:</label>
+									<select name="color" id="color">
+										{% for color in colors %}
+											<option value="{{ color.id }}" {% if ad and color == ad.color %}selected="selected"{% endif %}>
+												{{ color.name}}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 								<p>
 									<label>Fuel type:</label>
-									<input type="text" name="fuel" />
+									<select name="fuel" id="fuel">
+										{% for fuel in fuels %}
+											<option value="{{ fuel.id }}" {% if ad and fuel == ad.fuel %}selected="selected"{% endif %}>
+												{{ fuel.name}}
+											</option>
+										{% endfor %}
+									</select>
 								</p>
 								
 							</div><!--/ .five-->
 							
 							<div class="five columns omega">
-	
-								<p>
-									<label>Door count:</label>
-									<input type="text" name="doorcount" />	
-								</p>
-								
-								<p>
-									<label>Transmission:</label>
-									<input type="text" name="transtype" />	
-								</p>
-								
+
 								<p class="three columns alpha">
-									<label>State:</label>
-									<input type="text" name="state" required />
+									<label>Price:</label>
+									<input type="text" name="price" {% if ad %}value="{{ ad.price }}"{% endif %} required/>
 								</p>
 								
 								<p class="three columns omega">
+									<label>Year:</label>
+									<input type="text" name="manufacture_year" {% if ad %}value="{{ ad.manufacture_year }}"{% endif %} required />
+								</p>
+								
+								<p class="three columns alpha">
+									<label>Milleage:</label>
+									<input type="text" name="mileage" {% if ad %}value="{{ ad.mileage }}"{% endif %} required />
+								</p>
+								
+								<p class="three columns omega">
+									<label>State:</label>
+									<input type="text" name="state" {% if ad %}value="{{ ad.state }}"{% endif %} required />
+								</p>
+								
+								<p class="three columns alpha">
 									<label>City:</label>
-									<input type="text" name="city" required />
+									<input type="text" name="city" {% if ad %}value="{{ ad.city }}"{% endif %} required />
 								</p>
 	
-								<p class="three columns alpha">
+								<p class="three columns omega">
 									<label>Zip:</label>
-									<input type="text" name="zip" required />
+									<input type="text" name="zip" {% if ad %}value="{{ ad.zip }}"{% endif %} required />
 								</p>
 								
 							</div><!--/ .five-->
@@ -131,7 +182,7 @@
 								
 								<p>
 									<label>Title:</label>
-									<input type="text" name="title" required/>
+									<input type="text" name="title" {% if ad %}value="{{ ad.title }}"{% endif %} required/>
 								</p>
 								
 							</div><!--/ .five-->
@@ -140,7 +191,7 @@
 							
 							<p>
 								<label>Description:</label>
-								<textarea name="description" required></textarea>
+								<textarea name="description" required>{% if ad %}{{ ad.description }}{% endif %}</textarea>
 							</p>
 							
 							<div class="clear"></div>
@@ -313,5 +364,51 @@
 
 	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
 	
+	<script>
+		/*--------- Make & Model selection options --------*/
+		$(document).ready(function(){
+			{% if ad %}
+				$('select#model').empty();
+			   const makeId = {{ ad.make.id }};
+	  
+			   $.ajax({
+				  type: "POST",
+				  url: "{% url 'cardealer:getmodels' %}",
+				  data: {
+					 'make': makeId,
+					 'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+				  },
+				  success: function (data) {
+					 data.forEach(function (data) {
+						if (data.id == {{ ad.model.id }}) {
+						   $('select#model').append(`<option value="${data.id}" selected="selected">${data.name}</option>`);
+						}
+						else {
+						   $('select#model').append(`<option value="${data.id}">${data.name}</option>`);
+						}
+					 });
+				  }
+			   });
+			{% endif %}
+			$('select#make').change(function () {
+				const makeId = $(this).val();
+	
+				$.ajax({
+					type: "POST",
+					url: "{% url 'cardealer:getmodels' %}",
+					data: {
+					'make': makeId,
+					'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+					},
+					success: function (data) {
+					$('select#model').empty();
+					data.forEach(function (data) {
+						$('select#model').append(`<option value="${data.id}">${data.name}</option>`);
+					});
+					}
+				});
+			});
+		 });
+	</script>
 </div><!--/ .main-->
 {% endblock content %}

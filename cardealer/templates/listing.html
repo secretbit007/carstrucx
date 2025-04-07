@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
+{% load my_tags %}
 
 {% block title %}
 {{ title }}
@@ -40,46 +42,76 @@
 			</div><!--/ .page-header-->
 
 			<section id="change-items" class="item-grid">
+				{% for ad in ads %}
+					<article>
+						
+						<a href="{% url 'cardealer:detail' pk=ad.id %}" class="single-image picture video">
+							{% for picture in ad.picture_set.all %}
+								{% if forloop.first %}
+									<img src={{ picture.thumb_med.url }} class="img-responsive" alt="">
+								{% endif %}
+							{% endfor %}
+						</a>
 
-				<article>
-					
-					<a href="one-products.html" class="single-image picture video">
-						<img src="images/temp/thumb-1.jpg" alt="">
-					</a>
+						<div class="detailed">
+							
+							<h6 class="title-item">
+								<a href="{% url 'cardealer:detail' pk=ad.id %}">{{ ad.title }}</a>
+							</h6>
+							
+							<span class="price">${{ ad.price | intcomma }}</span>
+							
+							<div class="clear"></div>
+							
+							<ul class="list-entry">
+								{% if ad.mileage %}
+									<li><b class="label">Mileage:</b><span>{{ ad.mileage }}</span></li>	
+								{% endif %}
+								{% if ad.manufacture_year %}
+									<li><b class="label">Year:</b><span>{{ ad.manufacture_year }}</span></li>
+								{% endif %}
+								<li><b class="label">Location:</b><span>USA, {{ ad.state }}, {{ ad.city }}, {{ ad.zip }}</span></li>	
+							</ul><!--/ .list-entry-->
 
-					<div class="detailed">
+							<a href="{% url 'cardealer:detail' pk=ad.id %}" class="button orange">Details</a>
+							
+						</div><!--/ .detailed-->
 						
-						<h6 class="title-item">
-							<a href="one-products.html">2009 Aston Martin DB9</a>
-						</h6>
-						
-						<span class="price">$8.966</span>
-						
-						<div class="clear"></div>
-						
-						<ul class="list-entry">
-							<li><b class="label">Engine:</b><span>1.4i TS 5Dr</span></li>
-							<li><b class="label">Mileage:</b><span>75000</span></li>	
-							<li><b class="label">Year:</b><span>2009</span></li>	
-							<li><b class="label">Location:</b><span>New Jersey/ Newark</span></li>	
-						</ul><!--/ .list-entry-->
-
-						<label class="compare"><input type="checkbox" />Compare</label>
-						<a href="one-products.html" class="button orange">Details</a>
-						
-					</div><!--/ .detailed-->
-					
-				</article>
+					</article>
+				{% endfor %}
 
 			</section><!--/ #change-items-->	
 
 			<div class="wp-pagenavi clearfix">
-				
-				<span class="pages">Page 1 of 2</span>
-				<a class="prevpostslink" href="#"></a>
-				<span class="current">1</span>
-				<a class="page" href="#">2</a>
-				<a class="nextpostslink" href="#"></a>
+				{% if ads.has_previous %}
+					<a class="prevpostslink" href="?{% param_replace page=ads.previous_page_number %}" />
+
+					{% if ads.number > 3 %}
+						<a href="?{% param_replace page=1 %}" class="page">1</a>
+						{% if ads.number > 4 %} 
+							<span>...</span>
+						{% endif %}
+					{% endif %}
+				{% endif %}
+
+				{% for num in ads.paginator.page_range %} 
+					{% if ads.number == num %}
+						<span class="current">{{ num }}</span>
+					{% elif num > ads.number|add:'-3' and num < ads.number|add:'3' %}
+						<a href="?{% param_replace page=num %}" class="page">{{ num }}</a>
+					{% endif %}
+				{% endfor %}
+
+				{% if ads.has_next %}
+					{% if ads.number < ads.paginator.num_pages|add:'-3' %}
+						<span>...</span>
+						<a href="?{% param_replace page=ads.paginator.num_pages %}" class="page">{{ ads.paginator.num_pages }}</a>
+					{% elif ads.number < ads.paginator.num_pages|add:'-2' %}
+						<a href="?{% param_replace page=ads.paginator.num_pages %}" class="page">{{ ads.paginator.num_pages }}</a>
+					{% endif %}
+
+					<a href="?{% param_replace page=ads.next_page_number %}" class="nextpostslink"></a>
+				{% endif %}
 				
 			</div><!--/ .wp-pagenavi-->
 
@@ -102,68 +134,28 @@
 				
 				<div class="search-entry clearfix">
 
-					<form action="/" class="form-panel">
+					<form action="{% url 'cardealer:listing' %}" class="form-panel">
+
+						{% csrf_token %}
+						<input type="hidden" name="page" value="1">
+
+						<fieldset>
+							<label>Keyword:</label>
+							<input style="width: 100%;" type="text" name="title" />
+						</fieldset>
+
+						<fieldset>
+							<label>Year:</label>
+							<input style="width: 100%;" type="text" name="manufacture_year" />
+						</fieldset>
 
 						<fieldset>
 							<label>Make:</label>
-							<select>
-								<option value="0">Any</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
-							</select>
-						</fieldset>
-
-						<fieldset class="not-active">
-							<label>Model:</label>
-							<select>
-								<option value="0">Any</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
-							</select>
-						</fieldset>
-
-						<fieldset>
-							<label>Price <span>min</span>:</label>
-							<select>
-								<option value="0">No max</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
-							</select>
-						</fieldset>
-
-						<fieldset>
-							<label>Price <span>max</span>:</label>
-							<select>
-								<option value="0">Any</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
-							</select>
-						</fieldset>
-
-						<fieldset>
-							<label>Year <span>from</span>:</label>
-							<select>
-								<option value="0">Any</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
-							</select>
-						</fieldset>
-
-						<fieldset>
-							<label>Year <span>to</span>:</label>
-							<select>
-								<option value="0">Any</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
-							</select>
-						</fieldset>
-						
-						<fieldset>
-							<label>Body type</label>
-							<select>
-								<option value="0">Any</option>
-								<option value="1">Lorem</option>
-								<option value="2">Ipsum</option>
+							<select style="width: 100%;" class=" form-control make" name="make">
+								<option label="Any Make"></option>
+								{% for make in makes %}
+									<option value="{{ make.id }}">{{ make.name }}</option>
+								{% endfor %}
 							</select>
 						</fieldset>
 
