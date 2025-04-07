@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navigation %}
+<nav id="navigation" class="navigation">
+			
+	<ul>
+		<li><a href="{% url "cardealer:index" %}">Home</a></li>
+		<li><a href="{% url "cardealer:listing" %}">All Listings</a></li>
+		<li><a href="{% url "cardealer:contact" %}">Contacts</a></li>
+		<li><a href="{% url 'cardealer:terms' %}">Terms of Use</a></li>
+		<li class="current-menu-item"><a href="{% url 'cardealer:safety' %}">Safety</a></li>
+		<li><a href="{% url 'cardealer:privacy' %}">Privacy Policy</a></li>
+	</ul>
+	
+</nav><!--/ #navigation-->
+{% endblock navigation %}
+
+{% block content %}
+<div class="main">
+    <section class="container clearfix">
+        <p class="service-summary">Shop Safely</p>
+        <p>A few safety rules...</p>
+        <p>- Deal locally or use third party services ( escrow ).</p>
+        <p>- Never make payments with Western Union or Moneygram.</p>
+        <p>- Don't accept cashier checks or money orders.</p>
+        <p>Be careful...</p>
+        <p>- Be careful when somebody keeps pushing you to complete the deal.</p>
+        <p>- Be careful when someone asks for your bank account or credit card number.</p>
+        <p>Remember...</p>
+        <p>- {{ request.get_host }} is NOT involved in any transaction (payment services, shipping, guarantee transactions, etc), does NOT offer "buyer protection" and does NOT offer "seller certification".</p>
+        <p>- {{ request.get_host }} does NOT accept any responsibility for the goods sold on this website. The advertiser bear all the responsibility. For any problems, please contact us.</p>
+    </section>
+</div>
+{% endblock content %}

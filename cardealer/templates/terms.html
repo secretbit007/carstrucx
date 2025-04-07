@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navigation %}
+<nav id="navigation" class="navigation">
+			
+	<ul>
+		<li><a href="{% url "cardealer:index" %}">Home</a></li>
+		<li><a href="{% url "cardealer:listing" %}">All Listings</a></li>
+		<li><a href="{% url "cardealer:contact" %}">Contacts</a></li>
+		<li class="current-menu-item"><a href="{% url 'cardealer:terms' %}">Terms of Use</a></li>
+		<li><a href="{% url 'cardealer:safety' %}">Safety</a></li>
+		<li><a href="{% url 'cardealer:privacy' %}">Privacy Policy</a></li>
+	</ul>
+	
+</nav><!--/ #navigation-->
+{% endblock navigation %}
+
+{% block content %}
+<div class="main">
+    <section class="container clearfix">
+        <p class="service-summary">PLEASE READ THESE TERMS OF USE CAREFULLY BEFORE USING THIS WEBSITE</p>
+        <p>These Terms of Use describe the terms and conditions under which you, the user, are granted the right to use the websites operated by light-classifieds.com.</p>
+
+        <p class="service-summary">USER AGREEMENT</p>
+        <p>BY USING THIS WEBSITE YOU REPRESENT YOU ARE OF LEGAL AGE AND AGREE TO BE BOUND BY THESE TERMS OF USE, AND ANY SUBSEQUENT MODIFICATIONS, AND THE OTHER POLICIES POSTED ON THE WEBSITE. Your use of this Website is contingent on the foregoing agreement, and if you do not agree, you must cease using the Website. Your electronic acceptance of these Terms of Use and other posted policies through your use of this Website shall have the same force and effect as if you had actually signed an agreement embodying these terms.  may change these Terms of Use at any time by posting changes on this page of the Website. It is your responsibility to review these Terms of Use prior to each use of the Website. By continuing to use the Website, you agree to any such changes.</p>
+
+        <p class="service-summary">WEBSITE AND CONTENT</p>
+        <p>Website Availability</p>
+        <p>We may change, suspend or discontinue availability of any aspect of the Website at any time. We may also impose limits, registration requirements or fees on certain features or services or restrict your access to parts or the entire Website without notice or liability. In addition, the Website contains links to other Internet sites, resources, and sponsors or advertisers on the Website. We are not responsible for the availability of these outside resources, or their contents, and accordingly, you should direct any concerns regarding any link or other website to the site administrator or webmaster of such site.</p>
+
+        <p class="service-summary">Copyright</p>
+        <p>All content on the Website is protected by copyright. You must abide by all copyright notices, information, or restrictions contained in any content accessed through the Website.</p>
+
+        <p class="service-summary">Personal Non-Commercial Use</p>
+        <p>This Website is for your personal and noncommercial use only.</p>
+
+        <p class="service-summary">Links/Advertisements/Search Engines</p>
+        <p>The Website may link to other sites operated by third parties. The inclusion of any link to such sites does not imply endorsement or recommendation by the Website, or by GH or its affiliates of these sites, but is for your reference and convenience only. We are not responsible for the content or accuracy of any off-site pages or any other sites linked to the Website. Linking to any other off-site pages or other sites is at your own risk and subject to the terms and conditions of use of those sites.</p>
+        <p>The Website also contains advertisements by third parties. Unless otherwise specifically stated on the Website, we do not endorse or make any representation or recommendation regarding the quality, or accuracy of any products or services featured in, or linked to any advertisement that appears on the Website.</p>
+        <p>Unless otherwise prohibited under these Terms of Use, you are permitted to create hyperlinks to the content on the Website (including “deep linking” to articles or pages within site), provided that (1) the hyperlink text accurately describes the content as it appears on the Website, (2) no “scraping” of the content by any means (i.e., extracting content from the Website and reformatting it, aggregating it with other content or redistributing it other than in its complete originally displayed format), (3) under no circumstances may you “frame” the Website or any of its content or copy portions of the Website to a server, except as part of an Internet service provider’s incidental caching of pages and (4) each page within the Website must be displayed in full (including all trademarks, branding, advertising and promotional materials), unaltered without any accompanying frame, border, margin, design, branding, trademark, advertising or promotional materials not originally displayed on the page within the Website. We reserve the right at any time in our sole discretion to revoke this permission generally, or your right to use specific links. If you have any questions regarding these linking policies you may contact us, or if you wish to link in a manner not authorized in these Terms of Use, you must get our prior written permission (see Contact Us below).</p> 
+        <p>Search engines and indexing agents are required to obey the Robots.txt file relating to the Website and its contents.</p>
+
+        <p class="service-summary">USER CREATED CONTENT</p>
+        <p>Submissions</p>
+        <p>You must be at least 13 years old to contribute content to this Website.</p>
+        <p>Through your submission of any materials of any kind (whether text, photos, video or other content), you grant its affiliates the irrevocable, nonexclusive, worldwide, royalty-free, fully paid-up, transferable and sub licensable right and license to host, index, cache, tag, encode, use, copy, modify, adapt, transmit, excerpt, remove, publish, distribute, publicly display and perform, and create derivative works of, in each case in any media now or hereafter known and in any manner for any non-commercial or commercial purpose (collectively “Use”) the content submitted by you with no monetary compensation at any time. By making any submission, you waive any moral rights you may have if the materials are changed in a manner not agreeable to you. Carstrucx has no obligation to provide attribution for any content you post. If you do not agree to these terms, do not submit any content.</p>
+        <p>Nothing in these Terms of Use prohibits you from redistributing or selling your original content to other parties.</p>
+        <p>You are solely responsible for all content that you post, email or otherwise make available through the Website. For all content provided by you, you agree to indemnify Carstrucx Media and its affiliates as provided in Legal Terms below.</p>
+
+        <p class="service-summary">Content Submission Rules and Restrictions</p>
+        <p>By submitting any content, you represent and warrant that: (i) you either own the content or have all necessary rights to use and submit it; (ii) all information you provide is true, accurate and complete, and does not violate these Terms of Use or the terms of any third party license; and, (iii) the content will not cause injury, embarrassment or harm to any person or entity.</p>
+        <p>You are solely responsible for the content you submit.</p>
+
+        <p class="service-summary">Classified Advertising</p>
+        <p>You agree that any classified advertisement you submit for publication on the Website (the “classified ad”) becomes the property of Carstrucx. By submitting the classified ad, you assign all ownership interest in the classified ad as it appears on the Website to Carstrucx under copyright law or otherwise. You understand that submission of a classified ad to Carstrucx does not constitute a commitment by Carstrucx to publish the classified ad on the Website and that publication of the classified ad does not constitute an agreement for continued publication of the classified ad on the Website. We will accept only standard abbreviations and require proper punctuation in the classified ad. Carstrucx reserves the right to edit, reclassify, revise, reject or cancel any classified ad at any time, in our sole discretion, Rates and specification for classified ads are subject to change at any time without notice.</p>
+
+        <p class="service-summary">Identity and Privacy</p>
+        <p>You must use a consistent handle or account name for any submissions you make, and you may not submit content under another person’s name. If you are an elected official, you must submit content identifying yourself as such when posting about a political issue. “Sock puppets” are not permitted (i.e., using a fake or alternate identity to post content for a deceptive purpose, such as without limitation, praising a person or company without disclosing an underlying affiliation with that person or company).</p>
+        <p>We reserve the right to include your real name on your internet postings if required through registration or otherwise provided to us, or when republishing your material in a printed edition of one of our publications.</p>
+        <p>Carstrucx does not warrant or claim to have verified the identity of any user. There may be users who participate under a false identity.</p>
+        <p>For information on our privacy policies regarding personal information gathered on the Website, please see our Privacy Policy link at the bottom of the page.</p>
+
+        <p class="service-summary">Real-world Meetings</p>
+        <p>The Website offers some social networking opportunities, including enabling users to create profiles that are designed to allow individuals to meet each other for any purpose. In addition, any posting to the Website will be publicly viewable, and your identity may be discovered by other users. We cannot vouch for the safety of offline meetings of individuals you meet through the Website, and such meetings are held at your sole risk and liability. Furthermore, you are advised to be careful not to accidentally divulge personally identifying information about yourself, including but not limited to your telephone number(s), street addresses, URLs or email addresses publicly on the Website. If you do provide this information on the Website or to a third party who you met through the Website, it is at your sole risk. In addition, if you choose to submit content to the Website in an area that requires that your real identity be disclosed, you do so at your sole risk and liability.</p>
+
+        <p class="service-summary">WEBSITE REGISTRATION</p>
+        <p>Registration</p>
+        <p>Some areas of the Website may require registration in order to gain access or submit content. You may not create more than one account unless expressly permitted in the registration rules. If you create multiple accounts, you are prohibited from creating the appearance that multiple accounts controlled by you are in fact all different individuals.</p>
+        <p>It is your responsibility to maintain the confidentiality of your password, if one is established. You are entirely responsible for any and all activities that occur on this Website under your account, and you agree to notify Carstrucx immediately of any known or suspected unauthorized use of your account, including loss, theft or unauthorized disclosure of your password..</p>
+
+        <p class="service-summary">Termination</p>
+        <p>You agree that at our sole discretion, and in our sole judgment, we or our agent may terminate your account at any time with or without cause.</p>
+        <p>Termination for cause may include, but is not limited to:</p>
+        <p>Violations of these Terms of Use</p>
+        <p>Violations of other posted rules of conduct</p>
+        <p>Violations of law or intellectual property rights</p>
+        <p>Harassment or belittling conduct toward individuals, companies or other third parties</p>
+        <p>An expression of your unwillingness to abide by these terms and conditions or other clearly posted site rules</p>
+        <p>Failure to abide by the instructions for guidelines of forum moderators, editors or other authorized members of the community to provide such moderation.</p>
+        <p>Failure to provide real, verifiable information about your true identity where requested or instructed</p>
+        <p>Termination of a user’s account may include any of the following actions:</p>
+        <p>A complete deletion (non recoverable) from all files, databases and any and all storage mechanism of the user’s files, uploads, content, and personally identifiable information. In such a case, neither Carstrucx nor its affiliates, partners or vendors have any obligation to retrieve or restore deleted data, or otherwise make good in any fashion the loss of such data.</p>
+        <p>User data, including without limitation submitted content, errant code or personal information, may also be hidden from public view, but not destroyed. In such a case, neither Carstrucx nor its affiliates, partners or vendors are under any obligation to retrieve or restore such data.</p>
+
+        <p class="service-summary">Indemnity</p>
+        <p>You agree at your expense to indemnify and hold harmless, Carstrucx and its affiliates and each of their respective partners, suppliers, licensors, officers, directors, shareholders, employees, representatives, contractors and agents, from any and all claims, suits, actions and investigations, and any costs, expenses, liabilities or damages therefrom (including attorneys’ fees and court costs) arising from or relating to any allegation regarding: (a) your use of the Website; (b) the Website’s or Carstrucx or its affiliates’ use of any content or information you provide, as long as our use is not inconsistent with these Terms of Use; (c) information or material posted or transmitted through your registration account or user ID, even if not posted by you; and, (d) any violation of these Terms of Use by you (collectively “Claims”).</p>
+        <p>Carstrucx reserves the right to select counsel and conduct the defense or settlement of any such Claim, which shall not relieve you of your obligation to indemnify as provided above.</p>
+
+        <p class="service-summary">Governing Law and Venue.</p>
+        <p>The agreement regarding these Terms of Use has been made in and shall be construed and enforced in accordance with New York law, without regard to its principles of the conflicts of law. Any action to enforce this agreement shall be brought in the federal or state courts located in New York City, and you hereby waive any objections to such action. Any cause of action you may have with respect to the Website or these Terms of Use must be commenced within one year after the claim or cause of action arises or such claim or cause of action is barred.</p>
+
+        <p class="service-summary">Severability; Waiver.</p>
+        <p>If any provision of these Terms of Use is found to be invalid by any court having competent jurisdiction, the invalidity of such provision shall not affect the validity of the remaining provisions of these Terms of Use, which shall remain in full force and effect. No waiver of these Terms of Use shall be deemed a further or continuing waiver of such term or condition or any other term or condition.</p>
+
+        <p class="service-summary">Copyright Violations.</p>
+        <p>Users are prohibited from uploading, posting or otherwise transmitting on the Website any materials that violate another party’s intellectual property rights. When we receive proper notification of alleged copyright infringement, we promptly remove or disable access to the allegedly infringing material and terminate the accounts of repeat infringers in accordance with the Digital Millennium Copyright Act. If you believe that any material on the Website infringes upon any copyright which you own or control, please notify us at copyrights@{{ request.get_host }}. (Please direct all general questions to webmaster@{{ request.get_host }}).</p>
+
+        <p class="service-summary">Informational Purposes</p>
+        <p>The information on the Website is provided solely for informational purposes , and does not constitute professional advice. You should not rely on this Website except as an informational resource.</p>
+
+        <p class="service-summary">CONTACT US</p>
+        <p>General Questions:</p>
+        <p>If you have any questions about these Terms of Use, please contact us in one of the following ways:</p>
+        <p>E-mail us at: contact@{{ request.get_host }} and insert only the words “Re: Terms of Use” in the subject line header of the email.</p>
+    </section>
+</div>
+{% endblock content %}
