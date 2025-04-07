@@ -218,7 +218,7 @@ def sendmail_request(request):
         send_mail(
             subject=subject,
             message=strip_tags(body),
-            from_email=f'{client} <{os.getenv('EMAIL_FROM')}>',
+            from_email=f"{client} <{os.getenv('EMAIL_FROM')}>",
             recipient_list=[receiver],
             fail_silently=False,
             auth_user=os.getenv('EMAIL_USER'),
