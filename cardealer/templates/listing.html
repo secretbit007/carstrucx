@@ -59,7 +59,7 @@
 						<div class="detailed">
 							
 							<h6 class="title-item">
-								<a href="{% url 'cardealer:detail' pk=ad.id %}">{{ ad.title }}</a>
+								<a href="{% url 'cardealer:detail' pk=ad.id %}">{{ ad.title | truncatechars:20 }}</a>
 							</h6>
 							
 							<span class="price">${{ ad.price | intcomma }}</span>
