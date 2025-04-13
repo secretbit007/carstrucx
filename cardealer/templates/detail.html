@@ -35,49 +35,31 @@
 				<span>Post Date: {{ posted_date | date:'F d, Y' }}</span> | <span>Views: {{ views }}</span> | <span>Location: USA, {{ state }}, {{ city }}, {{ zip }}</span> | <span><a href="{% url "cardealer:edit" pk=id %}">Edit</a></span> | <span><a href="{% url "cardealer:delete" pk=id %}">Delete</a></span>
 				<h2 class="title">{{ title }}</h2>
 
-				<section
-					id="thumbnail-carousel"
-					class="splide"
-					aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
-					>
+				<!-- Main Slider -->
+				<div class="splide" id="main-slider">
 					<div class="splide__track">
-							<ul class="splide__list">
-								<li class="splide__slide">
-									<img src="thumbnail01.jpg" alt="">
-								</li>
-								<li class="splide__slide">
-									<img src="thumbnail02.jpg" alt="">
-								</li>
-								<li class="splide__slide">
-									<img src="thumbnail03.jpg" alt="">
-								</li>
-							</ul>
+					<ul class="splide__list">
+						{% for picture in pictures %}
+							<li class="splide__slide">
+								<img src="{{ picture.image.url }}" alt="Description 1">
+							</li>
+						{% endfor %}
+					</ul>
 					</div>
-				</section>
+				</div>
 				
-				<div id="gallery" class="gallery">
-
-					<div class="slideshow-container">
-						<div id="loading" class="loader"></div>
-						<div id="slideshow" class="slideshow clearfix"></div>
-					</div><!--/ .slideshow-container-->
-
-					<div id="thumbs" class="clearfix">
-
-						<ul class="thumbs list-image clearfix">
-							{% for picture in pictures %}
-								<li>
-									<a class="thumb" name="leaf" href="{{ picture.image.url }}">
-										<img src="{{ picture.thumb_small.url }}" />
-									</a>
-								</li>
-							{% endfor %}
-
-						</ul><!--/ .thumbs-->
-
-					</div><!--/ #thumbs-->
-
-				</div><!--/ #gallery-->
+				<!-- Thumbnail Slider -->
+				<div class="splide" id="thumbnail-slider">
+					<div class="splide__track">
+					<ul class="splide__list">
+						{% for picture in pictures %}
+							<li class="splide__slide">
+								<img src="{{ picture.thumb_small.url }}" alt="Thumbnail 1">
+							</li>
+						{% endfor %}
+					</ul>
+					</div>
+				</div>
 
 				<div class="extra">
 					
@@ -186,15 +168,42 @@
 
 	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
 	<script>
-		document.addEventListener( 'DOMContentLoaded', function () {
-			new Splide( '#thumbnail-carousel', {
-				  fixedWidth: 100,
-				  gap       : 10,
-				  rewind    : true,
-				  pagination: false,
-			} ).mount();
-		} );
-		
+		document.addEventListener('DOMContentLoaded', function() {
+			// Main slider
+			var mainSlider = new Splide('#main-slider', {
+			  type: 'fade', // Use 'slide' or 'fade' effect
+			  heightRatio: 0.5, // Aspect ratio (height/width)
+			  pagination: false, // Disable default pagination
+			  arrows: true, // Show navigation arrows
+			  cover: true, // Images cover the slide area
+			});
+			
+			// Thumbnail slider
+			var thumbnailSlider = new Splide('#thumbnail-slider', {
+			  fixedWidth: 100, // Width of each thumbnail
+			  fixedHeight: 60, // Height of each thumbnail
+			  gap: 10, // Space between thumbnails
+			  rewind: true, // Infinite loop
+			  pagination: false, // Disable pagination
+			  isNavigation: true, // Mark as navigation
+			  focus: 'center', // Center the active thumbnail
+			  arrows: false, // Hide arrows
+			  breakpoints: {
+				600: {
+				  fixedWidth: 60,
+				  fixedHeight: 44,
+				}
+			  }
+			});
+			
+			// Sync both sliders
+			mainSlider.sync(thumbnailSlider);
+			
+			// Mount both sliders
+			mainSlider.mount();
+			thumbnailSlider.mount();
+		});
+
 		$('#email-form').on('submit', function (event) {
 			event.preventDefault();
 			$("#result").html('');
