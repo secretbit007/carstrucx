@@ -3519,3 +3519,8 @@ article.entry:first-child {margin-top: 0;}
     font-weight: 300;
     margin-bottom: 10px;
 }
+
+.splide__slide img {
+	width: 100%;
+	height: auto;
+}

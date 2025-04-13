@@ -34,6 +34,26 @@
 			<article class="item clearfix">
 				<span>Post Date: {{ posted_date | date:'F d, Y' }}</span> | <span>Views: {{ views }}</span> | <span>Location: USA, {{ state }}, {{ city }}, {{ zip }}</span> | <span><a href="{% url "cardealer:edit" pk=id %}">Edit</a></span> | <span><a href="{% url "cardealer:delete" pk=id %}">Delete</a></span>
 				<h2 class="title">{{ title }}</h2>
+
+				<section
+					id="thumbnail-carousel"
+					class="splide"
+					aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+					>
+					<div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide">
+									<img src="thumbnail01.jpg" alt="">
+								</li>
+								<li class="splide__slide">
+									<img src="thumbnail02.jpg" alt="">
+								</li>
+								<li class="splide__slide">
+									<img src="thumbnail03.jpg" alt="">
+								</li>
+							</ul>
+					</div>
+				</section>
 				
 				<div id="gallery" class="gallery">
 
@@ -166,6 +186,15 @@
 
 	<!-- - - - - - - - - - - - - end Container - - - - - - - - - - - - - - - - -->			
 	<script>
+		document.addEventListener( 'DOMContentLoaded', function () {
+			new Splide( '#thumbnail-carousel', {
+				  fixedWidth: 100,
+				  gap       : 10,
+				  rewind    : true,
+				  pagination: false,
+			} ).mount();
+		} );
+		
 		$('#email-form').on('submit', function (event) {
 			event.preventDefault();
 			$("#result").html('');
