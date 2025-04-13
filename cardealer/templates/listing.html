@@ -44,44 +44,46 @@
 
 			</div><!--/ .page-header-->
 
-			<section id="change-items" class="item-grid listing">
-				{% for ad in ads %}
-					<article>
-						
-						<a href="{% url 'cardealer:detail' pk=ad.id %}" class="single-image picture video">
-							{% for picture in ad.picture_set.all %}
-								{% if forloop.first %}
-									<img src={{ picture.thumb_med.url }} class="img-responsive" alt="">
-								{% endif %}
-							{% endfor %}
-						</a>
+			<section id="change-items" class="item-grid">
+				<div class="listing">
+					{% for ad in ads %}
+						<article>
+							
+							<a href="{% url 'cardealer:detail' pk=ad.id %}" class="single-image picture video">
+								{% for picture in ad.picture_set.all %}
+									{% if forloop.first %}
+										<img src={{ picture.thumb_med.url }} class="img-responsive" alt="">
+									{% endif %}
+								{% endfor %}
+							</a>
 
-						<div class="detailed">
-							
-							<h6 class="title-item">
-								<a href="{% url 'cardealer:detail' pk=ad.id %}">{{ ad.title | truncatechars:20 }}</a>
-							</h6>
-							
-							<span class="price">${{ ad.price | intcomma }}</span>
-							
-							<div class="clear"></div>
-							
-							<ul class="list-entry">
-								{% if ad.mileage %}
-									<li><b class="label">Mileage:</b><span>{{ ad.mileage }}</span></li>	
-								{% endif %}
-								{% if ad.manufacture_year %}
-									<li><b class="label">Year:</b><span>{{ ad.manufacture_year }}</span></li>
-								{% endif %}
-								<li><b class="label">Location:</b><span>USA, {{ ad.state }}, {{ ad.city }}, {{ ad.zip }}</span></li>	
-							</ul><!--/ .list-entry-->
+							<div class="detailed">
+								
+								<h6 class="title-item">
+									<a href="{% url 'cardealer:detail' pk=ad.id %}">{{ ad.title | truncatechars:20 }}</a>
+								</h6>
+								
+								<span class="price">${{ ad.price | intcomma }}</span>
+								
+								<div class="clear"></div>
+								
+								<ul class="list-entry">
+									{% if ad.mileage %}
+										<li><b class="label">Mileage:</b><span>{{ ad.mileage }}</span></li>	
+									{% endif %}
+									{% if ad.manufacture_year %}
+										<li><b class="label">Year:</b><span>{{ ad.manufacture_year }}</span></li>
+									{% endif %}
+									<li><b class="label">Location:</b><span>USA, {{ ad.state }}, {{ ad.city }}, {{ ad.zip }}</span></li>	
+								</ul><!--/ .list-entry-->
 
-							<a href="{% url 'cardealer:detail' pk=ad.id %}" class="button orange">Details</a>
+								<a href="{% url 'cardealer:detail' pk=ad.id %}" class="button orange">Details</a>
+								
+							</div><!--/ .detailed-->
 							
-						</div><!--/ .detailed-->
-						
-					</article>
-				{% endfor %}
+						</article>
+					{% endfor %}
+				</div>
 
 			</section><!--/ #change-items-->	
 
