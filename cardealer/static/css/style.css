@@ -1769,6 +1769,7 @@ h6 {line-height: 1.5em;}
 		/* ---------------------------------------- */
 		/*	Item Grid
 		/* ---------------------------------------- */
+		.item-grid .listing article:nth-child(3n) {margin-right: 0;}
 	
 		.item-grid,
 		.item-list {margin-bottom: 15px;}
@@ -1782,7 +1783,6 @@ h6 {line-height: 1.5em;}
 			}
 
 			.item-grid article:nth-child(4n) {margin-right: 0;}
-			.item-grid .listing article:nth-child(3n) {margin-right: 0;}
 
 				.item-grid .detailed { position: relative; }
 				
