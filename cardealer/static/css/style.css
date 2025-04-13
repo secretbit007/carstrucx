@@ -1769,7 +1769,36 @@ h6 {line-height: 1.5em;}
 		/* ---------------------------------------- */
 		/*	Item Grid
 		/* ---------------------------------------- */
-		.item-grid .listing article:nth-child(3n) {margin-right: 0;}
+		.listing,
+		.item-list {margin-bottom: 15px;}
+
+			.listing article {
+				display: inline-block;
+				margin-right: 20px;
+				margin-bottom: 20px;
+				width: 190px;
+				vertical-align: top;
+			}
+
+			.listing article:nth-child(4n) {margin-right: 0;}
+
+				.listing .detailed { position: relative; }
+				
+					.listing .list-entry { margin-bottom: 15px; }
+					
+						.listing .list-entry li { display: inline; margin-right: 3px; }
+						.listing .list-entry li:last-child { display: block; }
+						
+						.listing .list-entry li:after { content: ","; }
+						.listing .list-entry li:last-child:after { content: ""; }
+
+							.listing .list-entry .label { display: none; }
+					
+					.listing article .detailed .cost {
+						position: absolute;
+						top: 0;
+						right: 0;
+					}
 	
 		.item-grid,
 		.item-list {margin-bottom: 15px;}
@@ -2958,6 +2987,7 @@ article.entry:first-child {margin-top: 0;}
 		/* -------------------------------------------------- */
 
 		.item-grid article {width: 148px;}
+		.listing article {width: 148px;}
 		
 		/* -------------------------------------------------- */
 		/*	One Item
@@ -3191,6 +3221,13 @@ article.entry:first-child {margin-top: 0;}
 		
 			.item-grid article img { width: 100%; }
 
+		.listing article {
+			float: none;
+			width: 100%;
+		}
+		
+			.listing article img { width: 100%; }
+
 		/* ---------------------------------------- */
 		/*	Item List
 		/* ---------------------------------------- */	
@@ -3304,6 +3341,14 @@ article.entry:first-child {margin-top: 0;}
 
 		.item-grid article:nth-child(2n) {margin-right: 0 !important;}
 		.item-grid article:nth-child(3n) {margin-right: 20px;}
+
+		.listing article {
+			float: left;
+			width: 200px;
+		}
+
+		.listing article:nth-child(2n) {margin-right: 0 !important;}
+		.listing article:nth-child(3n) {margin-right: 20px;}
 		
 	/* ---------------------------------------------------------------------- */
 	/*	Blog
