@@ -1780,7 +1780,7 @@ h6 {line-height: 1.5em;}
 				vertical-align: top;
 			}
 
-			.listing article:nth-child(4n) {margin-right: 0;}
+			.listing article:nth-child(3n) {margin-right: 0;}
 
 				.listing .detailed { position: relative; }
 				
